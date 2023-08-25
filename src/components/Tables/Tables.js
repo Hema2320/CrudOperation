@@ -51,7 +51,7 @@ const Tables = ({ userdata, deleteUser, userGet, handlePrevious, handleNext, pag
                             <td>{index + 1 + (page - 1)*4}</td> 
                             <td>{element.fname + element.lname}</td>
                             <td>{element.email}</td>
-                            <td>{element.gender == "Male" ? "M" : "F"}</td>
+                            <td>{element.gender === "Male" ? "M" : "F"}</td>
                             <td className='d-flex align-items-center'>
                               <Dropdown className='text-center'>
                                 <Dropdown.Toggle className='dropdown_btn' id="dropdown-basic">
@@ -66,7 +66,7 @@ const Tables = ({ userdata, deleteUser, userGet, handlePrevious, handleNext, pag
                               </Dropdown>
                             </td>
                             <td className='img_parent'>
-                              <img src={`${BASE_URL}/uploads/${element.profile}`} alt="img" />
+                              <img src={`${BASE_URL}/profilepic/${element.profile}`} alt="img" />
                             </td>
                             <td>
                               <Dropdown>

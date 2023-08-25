@@ -41,7 +41,7 @@ const Profile = () => {
               <Row>
                 <div className="col">
                   <div className="card-profile-stats d-flex justify-content-center">
-                    <img src={`${BASE_URL}/uploads/${userprofile.profile}`} alt="" />
+                    <img src={`${BASE_URL}/profilepic/${userprofile.profile}`} alt="" />
                   </div>
                 </div>
               </Row>

@@ -10,6 +10,8 @@ import {usergetfunc,deletfunc,exporttocsvfunc} from "../../services/Apis";
 import Alert from 'react-bootstrap/Alert';
 import "./home.css"
 import { toast } from 'react-toastify';
+import image from "./background.jpg"
+
 
 
 const Home = () => {
@@ -31,9 +33,12 @@ const Home = () => {
   const navigate = useNavigate();
 
   const adduser = () => {
-    navigate("/register")
+    navigate("/studentsregister")
   }
-
+  
+  const login = () =>{
+    navigate("/login")
+  }
   // get user
   const userGet = async()=>{
     const response = await usergetfunc(search,gender,status,sort,page);
@@ -92,6 +97,9 @@ const Home = () => {
 
   return (
     <>
+         <div style={{ backgroundImage:`url(${image})`, backgroundSize:"contain", 
+    height:600,width:1300,
+ }}>
     {
       useradd ?  <Alert variant="success" onClose={() => setUseradd("")} dismissible>{useradd.fname.toUpperCase()} Succesfully Added</Alert>:""
     }
@@ -106,7 +114,6 @@ const Home = () => {
 
       <div className="container">
         <div className="main_div">
-          {/* search add btn */}
           <div className="search_add mt-4 d-flex justify-content-between">
             <div className="search col-lg-4">
               <Form className="d-flex">
@@ -121,7 +128,10 @@ const Home = () => {
               </Form>
             </div>
             <div className="add_btn">
-              <Button variant="primary" onClick={adduser}> <i class="fa-solid fa-plus"></i>&nbsp; Add User</Button>
+              <Button variant="warning" onClick={adduser}> <i class="fa-solid fa-plus"></i>&nbsp; Add User</Button>
+            </div>
+            <div className="add_btn">
+              <Button variant="primary" onClick={login}> <i class="fa-solid fa-plus"></i>&nbsp; Logout</Button>
             </div>
           </div>
           {/* export,gender,status */}
@@ -162,7 +172,7 @@ const Home = () => {
               <h3>Short By Value</h3>
               <Dropdown className='text-center'>
                 <Dropdown.Toggle className='dropdown_btn' id="dropdown-basic">
-                  <i class="fa-solid fa-sort"> Select Value</i>
+                  <i class="fa-solid fa-sort"> Select </i>
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   <Dropdown.Item onClick={()=>setSort("new")}>New</Dropdown.Item>
@@ -216,6 +226,7 @@ const Home = () => {
                                   />
         }
 
+      </div>
       </div>
     </>
   )

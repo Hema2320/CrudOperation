@@ -12,7 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import "./register.css"
 import { addData } from '../../components/context/ContextProvider';
 
-const Register = () => {
+const StudentRegister = () => {
 
   const [inputdata, setInputData] = useState({
     fname: "",
@@ -97,7 +97,7 @@ const Register = () => {
         "Content-Type":"multipart/form-data"
       }
 
-      const response = await registerfunc(data,config);
+    const response = await registerfunc(data,config);
       
       if(response.status === 200){
         setInputData({
@@ -112,7 +112,7 @@ const Register = () => {
         setStatus("");
         setImage("");
         setUseradd(response.data)
-        navigate("/");
+        navigate("/home");
       }else{
         toast.error("Error!")
       }
@@ -204,4 +204,4 @@ const Register = () => {
   )
 }
 
-export default Register
+export default StudentRegister

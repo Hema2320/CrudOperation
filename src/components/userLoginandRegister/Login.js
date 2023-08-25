@@ -1,0 +1,123 @@
+import React, { useState } from "react";
+import axios from "../../services/AxiosInterceptor";
+import { useNavigate, Link } from "react-router-dom";
+import image from "../../images/login-bg.png"
+const Login = () => {
+  const navigate = useNavigate();
+  const [input, setInput] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post("api/auth/users/login", input);
+      if (response.status === 200) {
+        alert(response.data.message);
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("name", response.data.name);
+        navigate("/home");
+      }
+    } catch (error) {
+      alert(error.response.data.message);
+    }
+  };
+  return (
+    <section className="vh-100" style={{ backgroundColor: "#9A616D" }}>
+      <div className="container py-5 h-150">
+        <div className="row d-flex justify-content-center align-items-center h-100">
+          <div className="col col-xl-10">
+            <div className="card" style={{ borderRadius: "1rem" }}>
+              <div className="row g-0">
+               <div class="col-md-6 col-lg-5 d-none d-md-block">
+                  <img
+                    src={image}
+                    alt="login form"
+                    class="img-fluid"
+                    style={{ borderRadius: "1rem 0 0 1rem" }}
+                  />
+                  <img
+                    src={image}
+                    alt="login form"
+                    class="img-fluid"
+                    style={{ borderRadius: "1rem 0 0 1rem" }}
+                  />
+                </div> 
+                <div class="col-md-6 col-lg-7 d-flex align-items-center"> 
+                  <div className="card-body p-4 p-lg-5 text-black">
+                    <form onSubmit={handleLogin}>
+                      <div className="d-flex align-items-center mb-3 pb-1">
+                        <i
+                          class="fas fa-cubes fa-2x me-3"
+                          style={{ color: " #ff6219" }}
+                        ></i>
+                        <span class="h1 fw-bold mb-0">Login here</span>
+                      </div>
+                      <h5
+                        className="fw-normal mb-3 pb-3"
+                        style={{ letterSpacing: "1px" }}
+                      >
+                        Sign into your account
+                      </h5>
+                      <div className="form-outline mb-2">
+                        <input
+                          type="email"
+                          id=""
+                          placeholder="Enter Email"
+                          className="form-control form-control-lg"
+                          name="email"
+                          value={input.email}
+                          onChange={(e) =>
+                            setInput({
+                              ...input,
+                              [e.target.name]: e.target.value,
+                            })
+                          }
+                        />
+                      </div>
+                      <div className="form-outline mb-4">
+                        <input
+                          placeholder="Enter Password"
+                          type="password"
+                          id="form2Example27"
+                          className="form-control form-control-lg"
+                          name="password"
+                          value={input.password}
+                          onChange={(e) =>
+                            setInput({
+                              ...input,
+                              [e.target.name]: e.target.value,
+                            })
+                          }
+                        />
+                      </div>
+                      <div className="pt-1 mb-4">
+                        <button
+                          className="btn btn-dark btn-lg btn-block"
+                          type="submit"
+                        >
+                          Login
+                        </button>
+                      </div>
+                      Forget Password ?
+                      <Link to={"/reset-password"}>Click Here</Link>
+                      <p class="mb-5 pb-lg-2" style={{ color: "#393f81" }}>
+                        Don't have an account?{" "}
+                        <Link to="/register" style={{ color: "#393f81" }}>
+                          Register here
+                        </Link>
+                      </p>
+                    </form>
+                  </div>
+                 </div> 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Login;
